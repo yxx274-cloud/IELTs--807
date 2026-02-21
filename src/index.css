@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #6C5CE7;
+  --color-primary-light: #A29BFE;
+  --color-primary-dark: #5A4BD1;
+  --color-success: #00B894;
+  --color-success-light: #55EFC4;
+  --color-error: #FF6B6B;
+  --color-error-light: #FFB8B8;
+  --color-warning: #FDCB6E;
+  --color-warning-light: #FFEAA7;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F9FE;
+  --color-bg: #FAFAFA;
+  --color-text: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-text-tertiary: #B2BEC3;
+  --color-border: #E8E8EE;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html.dark {
+  --color-surface: #16213E;
+  --color-surface-alt: #1E2A47;
+  --color-bg: #1A1A2E;
+  --color-text: #E0E0E0;
+  --color-text-secondary: #A0A0B0;
+  --color-text-tertiary: #636E80;
+  --color-border: #2A2A4A;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
