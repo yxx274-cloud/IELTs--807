@@ -78,10 +78,11 @@ export default function PracticePage() {
     }
   }, [currentWord, mode, answerState, speak])
 
-  // Auto-focus input
+  // Auto-focus input after animation completes
   useEffect(() => {
     if (mode === 'dictation' && !isFinished) {
-      inputRef.current?.focus()
+      const timer = setTimeout(() => inputRef.current?.focus(), 350)
+      return () => clearTimeout(timer)
     }
   }, [index, mode, isFinished])
 
@@ -390,6 +391,7 @@ export default function PracticePage() {
               placeholder="输入听到的单词，按 Enter 提交..."
               autoComplete="off"
               autoCapitalize="off"
+              autoFocus
               spellCheck={false}
               className="w-full text-center text-2xl font-mono py-4 bg-transparent border-b-3 border-border focus:border-primary outline-none transition-colors text-text"
             />
