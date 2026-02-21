@@ -367,42 +367,39 @@ export default function PracticePage() {
         />
       </div>
 
-      {/* Dictation mode — minimal: just input */}
+      {/* Dictation mode — input stays mounted to preserve focus on mobile */}
       {mode === 'dictation' && (
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`dictation-${index}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="space-y-6"
-          >
-            <div className="flex justify-center mb-2">
-              <div className="w-3 h-3 rounded-full bg-primary animate-pulse-soft" />
-            </div>
-
-            <input
-              ref={inputRefCallback}
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              placeholder="输入听到的单词，按 Enter 提交..."
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck={false}
-              className="w-full text-center text-2xl font-mono py-4 bg-transparent border-b-3 border-border focus:border-primary outline-none transition-colors text-text"
+        <div className="space-y-6">
+          <div className="flex justify-center mb-2">
+            <motion.div
+              key={`dot-${index}`}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="w-3 h-3 rounded-full bg-primary animate-pulse-soft"
             />
+          </div>
 
-            <div className="flex justify-center">
-              <button
-                onClick={handleDictationSubmit}
-                className="px-8 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors shadow-md shadow-primary/20"
-              >
-                下一个
-              </button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+          <input
+            ref={inputRefCallback}
+            type="text"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="输入听到的单词，按 Enter 提交..."
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck={false}
+            className="w-full text-center text-2xl font-mono py-4 bg-transparent border-b-3 border-border focus:border-primary outline-none transition-colors text-text"
+          />
+
+          <div className="flex justify-center">
+            <button
+              onClick={handleDictationSubmit}
+              className="px-8 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors shadow-md shadow-primary/20"
+            >
+              下一个
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Choice mode — with play button */}
